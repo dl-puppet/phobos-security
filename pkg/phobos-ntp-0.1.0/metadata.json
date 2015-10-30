@@ -1,0 +1,22 @@
+{
+  "name": "phobos-ntp",
+  "version": "0.1.0",
+  "author": "david levray",
+  "summary": "",
+  "license": "",
+  "source": "",
+  "project_page": "https://github.com/dl-puppet/phobos-ntp",
+  "issues_url": null,
+  "operatingsystem_support": [
+  
+  ],
+  "requirements": [
+  
+  ],
+  "tags": [
+  
+  ],
+  "dependencies": [
+  
+  ]
+}

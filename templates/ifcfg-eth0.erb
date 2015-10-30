@@ -1,0 +1,9 @@
+DEVICE=<%= scope ['resolv_device'] %>
+TYPE=<%= scope ['resolv_type'] %>
+HOTPLUG=<%= scope ['resolv_hotplug'] %>
+ONBOOT=<%= scope ['resolv_onboot'] %>
+NM_CONTROLLED=<%= scope ['resolv_controlled'] %>
+#HWADDR=<%= scope.lookupvar('::macaddress_eth0') %>
+BOOTPROTO=<%= scope ['resolv_bootproto'] %>
+PEERDNS=<%= scope ['resolv_peerdns'] %>
+IPV6INIT=<%= scope ['resolv_ipv6init'] %>

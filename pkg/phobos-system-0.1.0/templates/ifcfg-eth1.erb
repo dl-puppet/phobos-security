@@ -1,0 +1,9 @@
+DEVICE=eth1
+TYPE=Ethernet
+HOTPLUG=yes
+ONBOOT=yes
+NM_CONTROLLED=no
+HWADDR=<%= scope.lookupvar('::macaddress_eth1') %>
+BOOTPROTO=dhcp
+PEERDNS=no
+IPV6INIT=no

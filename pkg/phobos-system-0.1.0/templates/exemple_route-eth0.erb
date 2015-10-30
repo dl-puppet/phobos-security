@@ -1,0 +1,114 @@
+default via 192.168.1.1 dev interface
+10.10.10.0/24 via 192.168.1.1 [dev interface]
+
+ou encore:
+
+default via 192.168.0.1 dev eth0
+10.10.10.0/24 via 192.168.0.10 dev eth0
+172.16.1.10/32 via 192.168.0.10 dev eth0
+
+ou encore:
+
+ADDRESS0=10.10.10.0
+NETMASK0=255.255.255.0
+GATEWAY0=192.168.1.1
+
+ou encore (pour eth2 multi domaine):
+
+ADDRESS0=10.10.10.0
+NETMASK0=255.255.255.0
+GATEWAY0=192.168.0.10
+ADDRESS1=172.16.1.10
+NETMASK1=255.255.255.0
+GATEWAY1=192.168.0.10
+
+
+
+############ BOUCLE iteration 1 ###################
+		     #$users = ['kermit', 'beaker', 'statler', 'waldorf', 'tom']
+		     #user { $users:
+				 #    ensure => present,
+				 #	    comment => 'who gave these muppets user accounts?',
+				 #}
+				 
+############ BOUCLE iteration 2 ###################	
+#Bien que cet exemple peut sembler artificiel, il est en fait un extrait modifié d'un module (create_ressource)			
+define some_module::process_array(
+    $foo,
+    $array    # pass in the original $name
+) {
+    #notice(inline_template('NAME: <%= name.inspect %>'))
+
+    # do something here...
+
+    # build a unique name...
+    $length = inline_template('<%= array.length %>')
+    $ulength = inline_template('<%= array.uniq.length %>')
+    if ( "${length}" != '0' ) and ( "${length}" != "${ulength}" ) {
+        fail('Array must not have duplicates.')
+    }
+    # if array had duplicates, this wouldn't be a unique index
+    $index = inline_template('<%= array.index(name) %>')
+
+    # iterate, knowing your index
+    some::type { "${foo}:${index}":
+        foo => 'hello',
+        index => "${index}",
+    }
+}
+
+# a list
+$some_array = ['a', 'b', 'c']    # must not have duplicates
+
+# using the type requires that you pass in $some_array twice!
+some_module::process_array { $some_array:    # array
+    foo => 'bar',
+    array => $some_array,    # same array as above
+}
+
+
+
+############ BOUCLE iteration 3 (create_ressource)	###################	
+# Ceci est une technique similaire pour quand vous voulez spécifier des arguments différents pour chaque type:
+# Cela crée chaque ressource de l'utilisateur avec ses propres arguments. 
+# Si un argument est pas donnée dans les données de $, il est pris de la valeur par défaut de $ hachage.
+
+$defaults = {
+    ensure => present,
+    comment => 'a muppet',
+}
+$data = {
+    'kermit' => {
+        comment => 'the frog',
+    },
+    'beaker' => {
+        comment => 'keep him away from your glassware',
+    },
+    'fozzie' => {
+        home => '/home/fozzie',
+    },
+    'tom' => {
+        comment => 'the swedish chef',
+    }
+}
+create_resources('user', $data, $defaults)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

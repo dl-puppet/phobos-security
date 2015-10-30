@@ -1,0 +1,62 @@
+# .bashrc
+
+# User specific aliases and functions
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+
+#export http_proxy="http://sun.dbg.parimutuel.local:3128"
+
+#Configuration gnogme interface:
+#i=$(grep 'Language=' /var/lib/AccountService/users/${USER} | sed 's/Language=//')
+#if [ "$i" != "" ]; then
+#	export LANG=$i
+#fi
+
+#Configuration langue (en_US.UTF-8) / Jeu de caractères  Unicode (UTF-8):
+#Les commande: 'locale' vérifier la valeur actuelle: localectl: Afficher/modifier la config sous RedH 7 du fichier /etc/locale.conf
+#langue system par default est Anglais: en_US.utf8):
+		# locale
+		#LANG=en_US.UTF-8		(exemple RHL7: localectl set-locale LANG=LANG=fr_FR.UTF-8)
+		#LC_CTYPE="en_US.UTF-8"
+		#LC_NUMERIC="en_US.UTF-8"
+		#LC_TIME="en_US.UTF-8"
+		#LC_COLLATE="en_US.UTF-8"
+		#LC_MONETARY="en_US.UTF-8"
+		#LC_MESSAGES="en_US.UTF-8"
+		#LC_PAPER="en_US.UTF-8"
+		#LC_NAME="en_US.UTF-8"
+		#LC_ADDRESS="en_US.UTF-8"
+		#LC_TELEPHONE="en_US.UTF-8"
+		#LC_MEASUREMENT="en_US.UTF-8"
+		#LC_IDENTIFICATION="en_US.UTF-8"
+		#LC_ALL=
+LANG=fr_FR.UTF-8  ou fr_FR.utf8
+
+#configuration méthode de saisie (région/langue) et clavier (Redhat 7 utilise IBus):
+
+#Packs Langue
+# afficher la list des pack langue disponible:  yum langaivalable
+# installer un nouveau pacl langue:  yum langinstall xxxx
+# afficher la list des packs langue actuellement installé: yum langlist
+
+#Console ctrl+alt+Fx (RHL7: 6 console (désactivé par defaut); console 1 = console graphique)
+# shell => command [options]... |ou [+option]... <variable> 
+# sortir:  exit ou Ctrl+D
+
+
+
+
+
+
+
+
+
+ 

@@ -1,0 +1,125 @@
+# -----------------------------------
+# Platform defaults:
+# -----------------------------------
+        daemonize = 1
+#activate_agents = true
+#soft_shutdown = false
+#soft_shutdown_timeout = 5
+        libdir = /usr/libexec/mcollective
+#ssl_cipher = aes-256-cbc
+
+
+# ------------------------------------------
+# Subcollectives (optional):
+# ------------------------------------------
+#collectives = mcollective
+#main_collective = mcollective
+
+
+# -----------------------------------
+# CONFIGURATION RABBITMQ
+# -----------------------------------
+        connector = rabbitmq
+        direct_addressing = 1
+plugin.rabbitmq.vhost = /mcollective
+        plugin.rabbitmq.pool.size = 1
+        plugin.rabbitmq.pool.1.host = mcl-rec-appv1.adm.parimutuel.local
+        plugin.rabbitmq.pool.1.port = 61613
+        plugin.rabbitmq.pool.1.user = mcollective
+        plugin.rabbitmq.pool.1.password = marionette
+        # Send heartbeats in 30 second intervals. This is the shortest supported period.
+        plugin.rabbitmq.heartbeat_interval = 30
+
+# -----------------------------------
+# CONFIGURATIO NRABBITMQ FOR CLUSTERING
+# -----------------------------------
+# By default if heartbeat_interval is set it will request STOMP 1.1 but support fallback
+# to 1.0, but you can enable strict STOMP 1.1 only operation by disabling 1.0 fallback
+#plugin.rabbitmq.stomp_1_0_fallback = 0
+# Maximum amount of heartbeat read failures before retrying. 0 means never retry.
+#plugin.rabbitmq.max_hbread_fails = 2
+# Maxium amount of heartbeat lock obtain failures before retrying. 0 means never retry.
+#plugin.rabbitmq.max_hbrlck_fails = 0
+
+# -----------------------------------
+# CONFIGURATIO NRABBITMQ FOR USING SSL
+# -----------------------------------
+#plugin.rabbitmq.pool.1.ssl = 1
+#plugin.rabbitmq.pool.1.ssl.ca = /var/lib/puppet/ssl/certs/ca.pem
+#plugin.rabbitmq.pool.1.ssl.cert = /var/lib/puppet/ssl/certs/pc-phobos.localdomain.pem
+#plugin.rabbitmq.pool.1.ssl.key = /var/lib/puppet/ssl/private_keys/pc-phobos.localdomain.pem
+#plugin.rabbitmq.pool.1.ssl.fallback = 0
+
+
+# -----------------------------------
+#SECURITY PLUGIN SETTINGS PSK ,SSL ou AES_SECURITY
+# -----------------------------------
+        securityprovider = psk
+
+# SSL plugin settings:
+#plugin.ssl_client_cert_dir = /etc/mcollective.d/clients
+#plugin.ssl_server_private = /etc/mcollective.d/server_private.pem
+#plugin.ssl_server_public = /etc/mcollective.d/server_public.pem
+
+# PSK plugin settings: (unset)
+        plugin.psk = password_psk
+
+
+# ------------------------------------------
+# RECOMMENDED FEATURES:
+# ------------------------------------------
+factsource = yaml
+plugin.yaml = /etc/mcollective/facts.yaml
+#fact_cache_time = 300
+#plugin.facter.facterlib = /var/lib/puppet/lib/facter
+identity = <%= @fqdn %>
+classesfile = /var/lib/puppet/classes.txt
+
+
+# ------------------------------------------
+# Registration (recommended):
+# ------------------------------------------
+        # Temp Ã©ulÃ©ntre chaque envoi de message
+        registerinterval = 600
+#registration_splay = true
+#registration = agentlist
+#registration_collective = mcollective
+
+
+# ------------------------------------------
+# Auditing (optional):
+# ------------------------------------------
+#rpcaudit = 1
+#rpcauditprovider = logfile
+#plugin.rpcaudit.logfile = /var/log/mcollective-audit.log
+
+
+# ------------------------------------------
+# Authorization (optional):
+# ------------------------------------------
+#rpcauthorization = 1
+#rpcauthprovider = action_policy
+
+
+# ------------------------------------------
+# Logging:
+# ------------------------------------------
+        logger_type = file
+        loglevel = warn
+        logfile = /var/log/mcollective.log
+        keeplogs = 5
+        max_log_size = 2097152
+        logfacility = daemon   # = user
+
+
+
+# ------------------------------------------
+# CONFIGURATION PUPPET AGENT
+# ------------------------------------------
+plugin.puppetd.puppetd = /usr/sbin/puppetd
+plugin.puppetd.lockfile = /var/lib/puppet/state/puppetdlock
+plugin.puppetd.statefile = /var/lib/puppet/state/state.yaml
+plugin.puppet.pidfile = /var/run/puppet/agent.pid
+plugin.puppetd.splaytime = 100
+plugin.puppet.summary = /var/lib/puppet/state/last_run_summary.yaml
+

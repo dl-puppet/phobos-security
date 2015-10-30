@@ -1,0 +1,12 @@
+#boot=/dev/sda
+default=0
+timeout=5
+#splashimage=(hd0,0)/grub/splash.xpm.gz
+splashimage=(hd0,0)/grub/pmu.bmp
+hiddenmenu
+title Red Hat Enterprise Linux Server (2.6.32-573.3.1.el6.x86_64)
+        root (hd0,0)
+        kernel /vmlinuz-2.6.32-573.3.1.el6.x86_64 ro root=/dev/mapper/rootvg-root rd_NO_LUKS  KEYBOARDTYPE=pc KEYTABLE=fr LANG=en_US.UTF-8 rd_LVM_LV=rootvg/root rd_NO_MD SYSFONT=latarcyrheb-sun16 crashkernel=auto rd_LVM_LV=rootvg/swap rd_NO_DM
+        initrd /initramfs-2.6.32-573.3.1.el6.x86_64.img
+
+<%= scope['noyau'] %>

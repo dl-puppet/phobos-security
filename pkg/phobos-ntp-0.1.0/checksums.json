@@ -1,0 +1,13 @@
+{
+  "README.md": "542c50e2468472d5ffad7329b96f265d",
+  "Rakefile": "f37e6131fe7de9a49b09d31596f5fbf1",
+  "manifests/config.pp": "430f425ed2636cd2bd8cb9ff6395443e",
+  "manifests/init.pp": "cfaf3019a8a5775544f478d868bde8e4",
+  "manifests/install.pp": "1f9bf5b38b56e7effea0aab2156768c5",
+  "manifests/params.pp": "3997ccd008a626cdee7c615e4310b8a4",
+  "manifests/service.pp": "f4805839a9257ca57b2cd398fe740b55",
+  "metadata.json": "335cd449eb0ce18162bb1cfc9b6fdb40",
+  "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+  "spec/spec_helper.rb": "3ea886dd135e120afa31e0aab12e85b0",
+  "templates/ntp.conf.erb": "bd9456f8056559c840c4ab0c1292c502"
+}

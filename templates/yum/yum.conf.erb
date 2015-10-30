@@ -1,0 +1,76 @@
+[main]
+#yum doit stocker son cache et les fichiers db:
+cachedir=/var/cache/yum/
+
+#yum maintient le cache des en-têtes et les paquets après l'installation succès:
+keepcache=1
+
+#niveau de sortie de message (0-10):
+debuglevel=2
+errorlevel=2
+rpmverbosity=critical
+
+#yum stocker des informations qui devraient persister:
+persistdir=/var/lib/yum
+
+# liste des paquets que yum ne devrait jamais supprimer:
+protected_packages=/etc/yum/protected.d
+
+#indique si yum doit ou non effectuer une vérification pour vous assurer que les paquets de multilib ont la même version:
+protected_multilib=on
+
+logfile=/var/log/yum.log
+
+#indique si yum doit ou non effectuer une vérification de la signature GPG sur les paquets:
+gpgcheck=1
+localpkg_gpgcheck=0
+repo_gpgcheck=0
+
+#Résoudre les problèmes par la suppression des packages qui pausent problèmes: 
+skip_broken
+
+#Détermine si yum invites à la confirmation des actions critiques:
+alwaysprompt=1
+
+#yum sera tolérant aux erreurs sur la ligne de commande à l'égard de paquets:
+tolerant=0
+
+#Liste des paquets à exclure de mises à jour ou installations:
+#exclude paquet1 paquet2 ...
+
+#faire l'update yum seulement sur les paquets de l'architectures installés (x64). 
+exactarch=1
+
+
+############### GESTION KERNEL ###############
+#Liste du paquet qui ne devraient jamais être installé et mis à jour (kernel)
+#installonlypkgs=kernel-bigmem,kernel-enterprise,kernel-smp,kernel-debug,kernel-unsupported,kernel-source,kernel-devel,kernel-PAE,kernel-PAE-debug
+installonly_limit=3
+#kernelpkgnames=
+
+############### GESTION UPDATE ###############
+obsoletes=1
+upgrade
+#comportement yum si deux ou plusieurs référentiels offrent les groupes de paquetages de même nom:
+overwrite_groups=0
+groupremove_leaf_only=1
+
+############### GESTION REPOS ################
+reposdir=/etc/yum.repos.d/
+retries=5
+#proxy=http://sun.dbg.parimutuel.local:3128
+
+plugins=1
+# metadata_expire=90m
+
+
+
+[repository]
+
+
+
+
+
+
+
+

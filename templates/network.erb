@@ -1,0 +1,5 @@
+NETWORKING=<%= scope['network_networking'] %>
+HOSTNAME=<%= scope.lookupvar('::hostname') %>
+NM_BOND_VLAN_ENABLED=<%= scope['network_nm'] %>
+NOZEROCONF=<%= scope['network_nozeroconf'] %>
+GATEWAYDEV=<%= scope['network_gateway'] %>
