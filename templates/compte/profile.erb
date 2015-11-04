@@ -1,0 +1,33 @@
+export PATH=/opt/freeware/bin:/usr/bin:/etc:/usr/sbin:/usr/ucb:$HOME/bin:/usr/bin/X11:/sbin:.
+
+if [ -s "$MAIL" ]           # This is at Shell startup.  In normal
+then echo "$MAILMSG"        # operation, the Shell checks
+fi                          # periodically.
+<% if username == 'root' %>
+export PS1="\[\033[01;36m\][\t]\[\033[01;31m\]\u@\h:\[\033[01;33m\]\w # \[\033[00m\]"
+<% else %>
+export PS1="\[\033[01;36m\][\t]\[\033[01;32m\]\u@\h:\[\033[0;36m\]\w $ \[\033[00m\]"
+<% end %>
+export TERM=xterm
+export PAGER=less
+
+alias git="LIBPATH='' git"
+alias ssh-keygen="LIBPATH='' ssh-keygen"
+alias ll='ls -lisa --color'
+
+<% if username != 'root' %>. /<%= service %>/profile_app/profile_app<% end %>
+<% if username =~ /at2/ %>[ -f ~/conf/profile.at2 ] && . ~/conf/profile.at2<% end %>
+<% if username =~ /at1/ %>[ -f ~/conf/profile.at1 ] && . ~/conf/profile.at1<% end %>
+if [ -r ~/src/sic/dev.env ] ; then
+  pushd ~/src/sic
+    . dev.env
+  popd
+fi
+[ -r ~/.profile_custom ] && . ~/.profile_custom
+
+if [ -f ~/VERSION ] ; then
+  echo "********** VERSION DU SIC DEPLOYEE ***********"
+  cat ~/VERSION
+fi
+
+<% if test_profile == true %>. /load-tst/test.env<% end %>
