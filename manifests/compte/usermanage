@@ -1,0 +1,105 @@
+define usermanage(
+  $username     = $title,
+  $group        = hiera('products_group', "products"),
+  $bCreateGroup = false,
+  $home         = "/home/${title}",
+  $bProfile     = true,
+  $service      = "",
+  $setSSHkeys   = false
+)
+{
+  $default_service = regsubst($::hostname, "-", "", "G")
+  $default_group   = hiera('products_group', "products")
+  $test_profile    = hiera('tippik', false)
+
+  if $bCreateGroup == true
+  {
+    group {$group:
+      ensure  => present
+    }
+  }
+
+  user {$username:
+    ensure  => present,
+    home    => $home,
+    gid     => $group,
+    groups  => $default_group,
+    shell   => '/usr/bin/bash',
+    require => [ Group[$group], Group[$default_group], File["/etc/security/login.cfg"] ]
+  }
+
+  if $username == hiera('user_at1', 'txat1') or $username == hiera('user_at2', 'txat2')
+  {
+    exec { "change password for ${username}":
+      command     => "echo ${username}:${username} | chpasswd",
+      subscribe   => User[$username],
+      refreshonly => true
+    }
+  }
+
+  file {$home:
+    ensure  => 'directory',
+    mode    => '0755',
+    owner   => $username,
+    group   => $group,
+    require => [ User[$username], Group[$group] ]
+  }
+
+  file {"${home}/.ssh":
+    ensure  => 'directory',
+    owner   => $username,
+    group   => $group,
+    mode    => '0700',
+    require => [ File[$home], User[$username], Group[$group] ]
+  }
+
+  concat {"${home}/.ssh/authorized_keys":
+    mode    => '0600',
+    owner   => $username,
+    group   => $group,
+    require => [ File["${home}/.ssh"], User[$username], Group[$group] ]
+  }
+  concat::fragment{"Key of jenkins for ${username}":
+    target  => "${home}/.ssh/authorized_keys",
+    source  => "puppet:///modules/usermanage/ssh_pub_jenkins",
+    require => File["${home}/.ssh"]
+  }
+  concat::fragment{"Key of ${username}":
+    target  => "${home}/.ssh/authorized_keys",
+    source  => ["puppet:///modules/usermanage/ssh_pub_${username}","puppet:///modules/usermanage/ssh_pub_empty"],
+    require => File["${home}/.ssh"]
+  }
+
+  if $setSSHkeys
+  {
+    file {"${home}/.ssh/id_rsa":
+      ensure  => 'file',
+      mode    => '0600',
+      owner   => $username,
+      group   => $group,
+      source  => "puppet:///modules/usermanage/ssh_${username}",
+      require => [ File["${home}/.ssh"], User[$username], Group[$group] ]
+    } 
+  
+    file {"${home}/.ssh/id_rsa.pub":
+      ensure  => 'file',
+      mode    => '0600',
+      owner   => $username,
+      group   => $group,
+      source  => "puppet:///modules/usermanage/ssh_pub_${username}",
+      require => [ File["${home}/.ssh"], User[$username], Group[$group] ]
+    }
+  }
+
+  if $bProfile == true
+  {
+    file {"${home}/.profile":
+      ensure  => 'file',
+      mode    => '0644',
+      owner   => $username,
+      group   => $group,
+      content => template('usermanage/profile.erb'),
+      require => [ File[$home], User[$username], Group[$group] ]
+    }
+  }
+}
