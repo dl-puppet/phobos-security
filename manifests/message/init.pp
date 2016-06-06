@@ -3,8 +3,8 @@ class motd
 (
 
 	###### CONFIG_MOTD ######  
-  	$dynamic                      = $motd::params::dynamic,
-  	$file_dynamic                 = $motd::params::file_dynamic,
+  $dynamic                      = $motd::params::dynamic,
+  $file_dynamic                 = $motd::params::file_dynamic,
 	$file_no_dynamic              = $motd::params::file_no_dynamic,
 
 	###### CONFIG_ISSUE ######   
@@ -26,7 +26,7 @@ class motd
   validate_string         ($file_dynamic)
   validate_string         ($file_no_dynamic)
 
-  validate_bool		      ($issue)
+  validate_bool		        ($issue)
   validate_string         ($file_issue)
 
   validate_string         ($file_name) 

@@ -77,7 +77,7 @@ class system
 
 
   anchor { 'system::begin': } ->
-	   class { '::system::network': } 
+	   #class { '::system::network': } 
 	   #class { '::system::boot': } 
 	   #class { '::system::selinux': } 
 	   #class { '::system::lvm': } 
@@ -88,7 +88,7 @@ class system
 	   #class { '::system::user': } 
 	   #class { '::system::ssh': } 
 	   #class { '::system::yum': } 
-	   #class { '::system::message:message': } 
+	   class { '::system::message:message': } 
 	   #class { '::system::snmp': } 
 	   #class { '::system::service': } 
   anchor { 'system::end': }
