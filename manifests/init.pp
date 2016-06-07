@@ -88,7 +88,7 @@ class system
 	   #class { '::system::user': } 
 	   #class { '::system::ssh': } 
 	   #class { '::system::yum': } 
-	   class { '::system::message:message': } 
+	   class { '::system::message::init': } 
 	   #class { '::system::snmp': } 
 	   #class { '::system::service': } 
   anchor { 'system::end': }
