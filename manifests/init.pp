@@ -77,7 +77,7 @@ class system
 
 
   anchor { 'system::begin': } ->
-	   class { '::system::network::network': } 
+	   class { '::system::network': } 
 	   #class { '::system::boot': } 
 	   #class { '::system::selinux': } 
 	   #class { '::system::lvm': } 
