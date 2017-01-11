@@ -1,4 +1,6 @@
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1          localhost localhost.localdomain localhost6 localhost6.localdomain6
 
+<%= scope.lookupvar('::ipaddress_wlp3s0') %> 	<%= scope.lookupvar('::hostname') %>.<%= scope.lookupvar('::domain') %>  <%= scope.lookupvar('::hostname') %>
+
 <%= scope['list_host'] %>

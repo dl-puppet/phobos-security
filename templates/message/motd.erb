@@ -11,7 +11,7 @@
   ==============================================================================
   - Hostname ............:        <%= scope.lookupvar('::hostname') %>
   - Address .............:        <%= scope.lookupvar('::ipaddress') %>
-  - Release .............:        Red Hat Enterprise Linux Server release <%= scope.lookupvar('::lsbdistrelease') %> (Santiago)
+  - Release .............:        Red Hat Enterprise Linux Server release <%= scope.lookupvar('::lsbdistrelease') %>
   - Kernel ..............:        <%= scope.lookupvar('::kernelrelease') %>
   - Uptime ..............:        <%= scope.lookupvar('::uptime_days') %> days and <%= scope.lookupvar('::uptime') %>
   ==============================================================================

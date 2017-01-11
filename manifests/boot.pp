@@ -1,10 +1,14 @@
- class system::boot inherits system
+ class system::boot
+(
+  $shutdown_name            = $system::shutdown_name,
+  
+) 
 {
   case $::osfamily {
 		'RedHat': {
 						  ######### PACKAGES ########
 						  Package {       
-						      ensure               => $system::package_ensure,         
+						      ensure               => $system::package_ensure_boot,         
 						  }
 						  
 						    $package_name   = ['initscripts','chkconfig','ntsysv', 'grubby', 'grub'],
@@ -14,11 +18,11 @@
 						        
 						  ###### CONFIG_FILES ######      
 						  File {
-						      ensure          => $system::file_ensure,
-						      group           => $system::file_group,
-						      mode            => $system::file_mode,
-						      owner           => $system::file_owner,
-						      backup          => $system::file_backup,
+						      ensure          => $system::file_ensure_boot,
+						      group           => $system::file_group_boot,
+						      mode            => $system::file_mode_boot,
+						      owner           => $system::file_owner_boot,
+						      backup          => $system::file_backup_boot,
 						  }
 						  
 						      file {
@@ -33,7 +37,7 @@
 						      #####################################
 						      #Configuration du noyau:
 						      #####################################
-						      $boot = 
+				          $boot = 
 							    "/boot/" :
 							    #AIX /unix (lien symbolique cers /usr/lib/boot/unix)
 						      #Linux /boot/vmlinuz
@@ -106,9 +110,6 @@
 									          ensure => link,
 									          target => "/etc/rc.d/rc.local";       
 						     }  					     
-			}
-			'AIX': {
-			  
-			}    
+			} 
     }
 }

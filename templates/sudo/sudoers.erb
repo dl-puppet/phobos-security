@@ -3,14 +3,8 @@
 # Host_Alias     MAILSERVERS = smtp, smtp2
 
 ## User Aliases :
-User_Alias 		ADMINS 		= stgeopen
-User_Alias      U_PILOTE 	= nagios,pilote,%supervgrp
-User_Alias      U_NAGIOS 	= nagios
-User_Alias      U_ORBIS 	= orbis
-User_Alias      U_ADMIN 	= %admingrp,patriot
-User_Alias      U_TIBCO 	= tibco
-User_Alias      U_TMA 		= %autregrp
-User_Alias      U_OTD 		= %ctrlm
+User_Alias 		ADMINS 		= phobos
+
 
 # Command Aliases System:
 Cmnd_Alias 		NETWORKING 	= /sbin/route, /sbin/ifconfig, /bin/ping, /sbin/dhclient, /usr/bin/net, /sbin/iptables, /usr/bin/rfcomm, /usr/bin/wvdial, /sbin/iwconfig, /sbin/mii-tool
@@ -22,62 +16,18 @@ Cmnd_Alias 		DELEGATING 	= /usr/sbin/visudo, /bin/chown, /bin/chmod, /bin/chgrp
 Cmnd_Alias 		PROCESSES 	= /bin/nice, /bin/kill, /usr/bin/kill, /usr/bin/killall
 Cmnd_Alias 		DRIVERS 	= /sbin/modprobe
 
-# Command Aliases PMU :
-Cmnd_Alias      C_OPENBET 	= /opt/openbet/current/bin/ob_control, /bin/env
-Cmnd_Alias      C_OPENBET2 	= /bin/su - openbet
-Cmnd_Alias      C_PILOTAGE 	= /etc/SRVmgr/*
-Cmnd_Alias      C_PILOT_U6 	= /u06*/u06*/*, /bin/cat, /bin/grep, /bin/ls, /root/FPO/Envoi_log_quotidien*, /usr/bin/find, /usr/bin/tailf
-Cmnd_Alias      C_SRVMGR 	= /usr/sbin/SRVmgr/SRVmgr monitor, /bin/grep
-Cmnd_Alias      C_ARJEL 	= /usr/bin/ssh
-Cmnd_Alias      C_PVS 		= /usr/sbin/pvs, /sbin/pvs
-Cmnd_Alias      C_GATEWAY 	= /tre*/Axway/Synchrony/SecureRelayRA/scripts/SynchronyXSR.init
-Cmnd_Alias      C_TT_INFO 	= /home/oracle/.PMU_SCRIPTS/TOOLS/info_TT, /bin/env, /oracle/product/TimesTen/tt1121/bin/ttstatus
-Cmnd_Alias      C_TMA 		= /bin/cat
-Cmnd_Alias      C_NAGIOS 	= /usr/bin/tail -n1 /var/log/messages
-Cmnd_Alias      C_ORACLE 	= /bin/su - oracle /usr/local/bin/lcrs_stat
-Cmnd_Alias      C_CTRLM 	= /etc/SRVmgr/*, /usr/sbin/SRVmgr/*, /var/log/SRVmgr/*, /usr/bin/tail, /bin/cat, /bin/touch /var/log/SRVmgr/*
-
 
 # Runas Aliases
 Runas_Alias     ROOT 		= root
-Runas_Alias     OPENBET 	= openbet
-Runas_Alias     TIBCO 		= tibco
 
 
 # Allow root to run any commands anywhere
 root    		ALL=(ALL)   ALL
-stgeopen		ALL=(ALL) 	NOPASSWD:	ALL
-
-U_ADMIN 		ALL=(ALL) 	NOPASSWD:	ALL
-U_TIBCO 		ALL=(ALL) 	NOPASSWD:	ALL
-
-U_PILOTE 		ALL=(ROOT) 	NOPASSWD:	C_PILOTAGE
-U_PILOTE 		ALL=(ROOT) 	NOPASSWD:	C_PILOT_U6
-U_PILOTE 		ALL=		NOPASSWD:	/sbin/multipath -ll
-U_PILOTE 		ALL=(ROOT) 	NOPASSWD:	C_OPENBET2
-U_PILOTE 		ALL=(OPENBET) NOPASSWD: SETENV: C_OPENBET
-
-U_ORBIS 		ALL=(OPENBET) SETENV: 	C_OPENBET
-
-U_NAGIOS 		ALL=(ROOT) 	NOPASSWD: 	C_NAGIOS
-U_NAGIOS 		ALL=(ROOT) 	NOPASSWD: 	C_SRVMGR
-U_NAGIOS 		ALL=		NOPASSWD: 	/sbin/multipath -ll
-U_NAGIOS 		ALL=(ROOT) 	NOPASSWD: 	C_ARJEL
-U_NAGIOS 		ALL=(ROOT) 	NOPASSWD: 	C_PVS
-U_NAGIOS 		ALL=(ROOT) 	NOPASSWD: 	C_GATEWAY
-U_NAGIOS 		ALL=(ROOT) 	NOPASSWD: 	SETENV: C_TT_INFO
-U_NAGIOS 		ALL=(ROOT) 	NOPASSWD: 	C_ORACLE
-
-U_TMA 			ALL=(TIBCO) NOPASSWD: C_TMA
-
-U_OTD 			ALL=NOPASSWD: C_CTRLM
-
+phobos		    ALL=(ALL) 	NOPASSWD:ALL
 
 
 # Defaults specification
 Defaults    requiretty
-Defaults:stge    !requiretty
-
 Defaults    env_reset
 Defaults    env_keep = "COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR \
                         LS_COLORS MAIL PS1 PS2 QTDIR USERNAME \

@@ -45,38 +45,38 @@ class system::network
                     # port (entre 0 et 1023) sont réservés pour les applications « standards 
                     # port pour les applications développées par les utilisateurs (1024 à 65535).
                     "/etc/services" :
-                    content => template("system/services.erb");
+                    content => template("system/network/services.erb");
 
                     # /etc/sysctl.conf: 
                     #  Paramètres par défaut du système #vivent dans /usr/lib/sysctl.d/00-system.conf.
                     "/etc/sysctl.conf" :
-                    content => template("system/sysctl.erb");
+                    content => template("system/network/sysctl.erb");
                     
                     # /etc/sysconfig/network (/etc/hostname):
                     "/etc/sysconfig/network" :
-                    content => template("system/network.erb");
+                    content => template("system/network/network.erb");
              
                      # /etc/networks :
                      # Permet d'affecter un nom logique à un réseau (definition des domains)
                      # permet par exemple d'adresser un réseau (route) sur son nom, plutôt que sur son adresse.
                     "/etc/networks" :
-                    content => template("system/networks.erb");
+                    content => template("system/network/networks.erb");
                     
                      # /etc/host.conf:
                      # Donne l'ordre dans lequel le processus de résolution de noms est effectué.
                     "/etc/host.conf" :
-                    content => template("system/host.conf.erb");
+                    content => template("system/network/host.conf.erb");
                     
                     # /etc/hosts: 
                     # Moyen d'assurer la résolution de noms, de donner un nom FQDN à un hôte
                     "/etc/hosts" :
-                    content => template("system/hosts.erb");
+                    content => template("system/network/hosts.erb");
                      
                     # /etc/resolv.conf:
                     # Permet d'affecter les serveurs de noms. 
                     # ATTENTION !!! Il peut etre configurer via DHCP
                     "/etc/resolv.conf" :
-                    content => template("system/resolv.erb"),
+                    content => template("system/network/resolv.erb"),
                     replace => "no";
 
                     # Configuration des interfaces reseaux:
@@ -92,10 +92,7 @@ class system::network
                     # Configuration /etc/sysconfig/network-scripts/ifcfg-eth1:
                     #/etc/sysconfig/network-scripts/ifcfg-eth1" :
                     #content => template("system/ifcfg-eth1.erb");
-                        
-                    #"/etc/sysconfig/network-scripts/ifcfg-eth2" :
-                    #replace => "no",
-                    #content => template("system/ifcfg-eth2.erb");
+
                 }
 
 }

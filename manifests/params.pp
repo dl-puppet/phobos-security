@@ -1,21 +1,19 @@
-# définition des paramètres par défaut 
-
 class system::params
 {
   
 	######### PACKAGES ######## ruby-shadow
 	$package_manage       	    = true
-    $package_name               = ['ntp', 'net-snmp', 'sudo','openssh-server', 'mcollective', 'rubygem-stomp'] 
+    $package_name             = ['ntp', 'sudo','openssh-server'] 
 	$package_ensure       	    = 'installed' 
 		  
 		  
 	######### SERVICES ########
-	$service_manage 		    = true
-	$service_name               = ['ntpd', 'snmpd', 'sshd','network', 'mcollective']   # lvm2-lvmetad start et service lvm2-monitor
+	$service_manage 		        = true
+	$service_name               = ['ntpd', 'sshd','network']   # lvm2-lvmetad start et service lvm2-monitor
 	$service_ensure             = 'running'            
 	$service_enable             = true
-	$service_hasstatus		    = true
-	$service_hasrestart 	    = true
+	$service_hasstatus		      = true
+	$service_hasrestart 	      = true
 
 
 	###### CONFIG_FILES ######     
@@ -27,12 +25,12 @@ class system::params
 
 
 	# /etc/sysconfig/network:
-	$network_networking			= 'yes'
-	#$HOSTNAME					= 'phobos'
-	$network_nm					= 'no'
-	$network_nozeroconf			= 'yes'
-	$network_gateway			= 'eth0'
-	#$GATEWAYDEV				='10.40.44.192'
+	$network_networking			     = 'yes'
+	#$HOSTNAME					         = 'phobos'
+	$network_nm					         = 'no'
+	$network_nozeroconf			     = 'yes'
+	$network_gateway			       = 'wlp3s0'
+	#$GATEWAYDEV				         = '10.40.44.192'
 
 	# /etc/resolv.conf:
 	$resolv_device              =  'eth0'
@@ -48,7 +46,32 @@ class system::params
 	# /etc/host.conf:
 	$host_conf                  =  "order hosts,bind"
 
-  	# /etc/hosts:
-  	$list_host                  =  ['']
+  # /etc/hosts:
+  $list_host                  = ''
 
+
+  ###### CONFIG_MOTD ######    
+  $dynamic                    = true
+  $file_dynamic               = '/etc/profile.d/motd.sh'
+  $file_no_dynamic            = '/etc/motd'
+  ###### CONFIG_ISSUE ######    
+  $issue                      = true
+  $file_issue                 = '/etc/issue.net'
+  ###### CONFIG_FILES ######      
+  $file_ensure_message        = 'present'  
+  $file_group_message         = '0' 
+  $file_mode_message          = '0640' 
+  $file_owner_message         = 'root'  
+  $file_backup_message        = '.puppet-bak' 
+  
+  
+  ###### CONFIG######   
+  $file_ensure_boot           = 'present'
+  $file_group_boot            = '0' 
+  $file_mode_boot             = '0640' 
+  $file_owner_boot            = 'root' 
+  $file_backup_boot           = '.puppet-bak' 
+  $package_ensure_boot        = 'present'
+  $shutdown_name              = 'phobos'
+  
 }
